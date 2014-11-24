@@ -1,0 +1,16 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-check'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '21.1.1'
+
+    defaultConfig {
+        versionCode 1
+        versionName '1.0'
+        minSdkVersion 7
+        targetSdkVersion 21
+    }
+
+    lintOptions { abortOnError false }
+}

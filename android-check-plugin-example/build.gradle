@@ -1,0 +1,17 @@
+buildscript {
+    repositories { jcenter(); mavenLocal() }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.14.2'
+        classpath 'com.noveogroup.android:check:1.0'
+    }
+}
+
+allprojects {
+    repositories { jcenter(); mavenLocal() }
+}
+
+task wrapper(type: Wrapper) {
+    group 'Build Setup'
+    description 'Initializes Gradle Wrapper.'
+    gradleVersion = '2.1'
+}

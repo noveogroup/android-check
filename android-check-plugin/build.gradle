@@ -1,0 +1,76 @@
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+repositories { jcenter() }
+
+dependencies {
+    compile gradleApi()
+}
+
+group = 'com.noveogroup.android'
+version = '1.0'
+description = 'Static code analysis plugin for Android project.'
+
+task('groovydocJar', type: Jar, dependsOn: groovydoc) {
+    group 'documentation'
+    description 'Assembles a jar archive containing Groovydoc API documentation.'
+    classifier = 'groovydoc'
+    from javadoc.destinationDir
+}
+
+task('sourcesJar', type: Jar) {
+    group 'documentation'
+    description 'Assembles a jar archive containing the main source code.'
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task wrapper(type: Wrapper) {
+    group 'Build Setup'
+    description 'Initializes Gradle Wrapper.'
+    gradleVersion = '2.1'
+}
+
+project.ext {
+    pom = {
+        licenses {
+            license {
+                name 'The MIT License (MIT)'
+                url 'http://opensource.org/licenses/MIT'
+                distribution 'repo'
+            }
+        }
+        scm {
+            url 'https://github.com/noveogroup/android-check'
+            connection 'scm:git@github.com:noveogroup/android-check.git'
+            developerConnection 'scm:git@github.com:noveogroup/android-check.git'
+        }
+        developers {
+            developer {
+                name 'Pavel Stepanov'
+                url 'https://github.com/stefan-nsk'
+                roles {
+                    role 'architect'
+                    role 'developer'
+                }
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact groovydocJar
+            artifact sourcesJar
+
+            pom.withXml {
+                asNode().appendNode('name', 'Android Check Plugin')
+                asNode().appendNode('description', project.description)
+                asNode().appendNode('url', 'https://github.com/noveogroup/android-check')
+                asNode().children().last() + project.ext.pom
+            }
+        }
+    }
+}
