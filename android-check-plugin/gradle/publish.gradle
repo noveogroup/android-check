@@ -1,0 +1,32 @@
+apply plugin: 'maven-publish'
+
+task('groovydocJar', type: Jar, dependsOn: groovydoc) {
+    group 'documentation'
+    description 'Assembles a jar archive containing Groovydoc API documentation.'
+    classifier = 'groovydoc'
+    from javadoc.destinationDir
+}
+
+task('sourcesJar', type: Jar) {
+    group 'documentation'
+    description 'Assembles a jar archive containing the main source code.'
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact groovydocJar
+            artifact sourcesJar
+
+            pom.withXml {
+                asNode().appendNode('name', project.ext.name)
+                asNode().appendNode('description', project.description)
+                asNode().appendNode('url', project.ext.website)
+                asNode().children().last() + project.ext.pom
+            }
+        }
+    }
+}
