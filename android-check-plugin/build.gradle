@@ -5,6 +5,7 @@ repositories { jcenter() }
 dependencies {
     compile gradleApi()
     compile 'com.puppycrawl.tools:checkstyle:6.1'
+    compile 'net.sourceforge.pmd:pmd:5.1.3'
 }
 
 group = 'com.noveogroup.android'
