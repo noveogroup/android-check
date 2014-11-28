@@ -4,6 +4,7 @@ repositories { jcenter() }
 
 dependencies {
     compile gradleApi()
+    compile 'com.puppycrawl.tools:checkstyle:6.1'
 }
 
 group = 'com.noveogroup.android'
