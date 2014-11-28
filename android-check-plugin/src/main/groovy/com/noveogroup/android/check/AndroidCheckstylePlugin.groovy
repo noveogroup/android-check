@@ -29,7 +29,6 @@ package com.noveogroup.android.check
 import com.puppycrawl.tools.checkstyle.CheckStyleTask
 import org.gradle.api.GradleException
 import org.gradle.api.Project
-import org.gradle.api.plugins.quality.CheckstylePlugin
 
 public class AndroidCheckstylePlugin extends AbstractAndroidCheckPlugin {
 
@@ -60,8 +59,6 @@ public class AndroidCheckstylePlugin extends AbstractAndroidCheckPlugin {
 
     @Override
     public void apply(Project target) {
-        target.apply { plugin CheckstylePlugin }
-
         target.extensions.add('androidCheckstyle', new CheckExtension())
 
         target.task(
