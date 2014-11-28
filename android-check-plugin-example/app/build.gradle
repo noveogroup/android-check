@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-checkstyle'
+apply plugin: 'android-pmd'
 
 android {
     compileSdkVersion 21
@@ -16,3 +17,5 @@ android {
 }
 
 androidCheckstyle { abortOnError false }
+
+androidPmd { abortOnError false }
