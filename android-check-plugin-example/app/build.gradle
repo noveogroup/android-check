@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-check'
+apply plugin: 'android-checkstyle'
 
 android {
     compileSdkVersion 21
@@ -14,3 +14,5 @@ android {
 
     lintOptions { abortOnError false }
 }
+
+androidCheckstyle { abortOnError false }
