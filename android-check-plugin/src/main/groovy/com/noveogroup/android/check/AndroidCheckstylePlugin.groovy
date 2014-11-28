@@ -27,28 +27,19 @@
 package com.noveogroup.android.check
 
 import com.puppycrawl.tools.checkstyle.CheckStyleTask
+import com.puppycrawl.tools.checkstyle.CheckStyleTask.Formatter
+import com.puppycrawl.tools.checkstyle.CheckStyleTask.FormatterType
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 
 public class AndroidCheckstylePlugin extends AbstractAndroidCheckPlugin {
-
-    private CheckStyleTask.Formatter createFormatter(File report) {
-        CheckStyleTask.FormatterType type = new CheckStyleTask.FormatterType()
-        type.value = 'xml'
-
-        CheckStyleTask.Formatter formatter = new CheckStyleTask.Formatter()
-        formatter.type = type
-        formatter.tofile = report
-
-        return formatter
-    }
 
     private CheckStyleTask createCheckStyleTask(Project target, URL configURL, File report) {
         CheckStyleTask checkStyleTask = new CheckStyleTask()
 
         checkStyleTask.project = target.ant.antProject
         checkStyleTask.configURL = configURL
-        checkStyleTask.addFormatter(createFormatter(report))
+        checkStyleTask.addFormatter(new Formatter(type: new FormatterType(value: 'xml'), tofile: report))
 
         getAndroidSources(target).findAll { it.exists() }.each {
             checkStyleTask.addFileset(target.ant.fileset(dir: it))
@@ -72,11 +63,12 @@ public class AndroidCheckstylePlugin extends AbstractAndroidCheckPlugin {
             URL config = configFile.toURI().toURL()
 
             File xmlReport = new File(target.buildDir, 'outputs/checkstyle/checkstyle.xml')
+            File htmlReport = new File(target.buildDir, 'outputs/checkstyle/checkstyle.html')
+            String template = target.buildscript.classLoader.getResourceAsStream('checkstyle/checkstyle.xsl').text
+
             xmlReport.parentFile.mkdirs()
             createCheckStyleTask(target, config, xmlReport).perform()
-
-            File htmlReport = xmlReport.absolutePath.replaceFirst(~/\.[^\.]+$/, '.html') as File
-            String template = target.buildscript.classLoader.getResourceAsStream('checkstyle/checkstyle.xsl').text
+            htmlReport.parentFile.mkdirs()
             target.ant.xslt(in: xmlReport, out: htmlReport) { style { string(template) } }
 
             def xml = new XmlSlurper().parseText(xmlReport.text)
