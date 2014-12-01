@@ -3,6 +3,36 @@ Android Check
 
 Static code analysis plugin for Android project.
 
+Usage
+-----
+
+Modifications in `build.gradle`:
+
+```groovy
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        ...
+        classpath 'com.noveogroup.android:check:1.0'
+        ...
+    }
+}
+
+apply plugin: 'android-checkstyle'
+androidCheckstyle {
+  abortOnError false
+  config file('path/to/your/checkstyle.xml')
+}
+
+apply plugin: 'android-pmd'
+androidPmd {
+  abortOnError false
+  config file('path/to/your/pom.xml')
+}
+```
+
+[![Download](https://api.bintray.com/packages/noveo-nsk/android-check/check/images/download.svg) ](https://bintray.com/noveo-nsk/android-check/check/_latestVersion)
+
 Developed By
 ============
 
