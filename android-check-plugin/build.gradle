@@ -34,6 +34,10 @@ project.ext {
             connection 'scm:git@github.com:noveogroup/android-check.git'
             developerConnection 'scm:git@github.com:noveogroup/android-check.git'
         }
+        issueManagement {
+            system 'GitHub'
+            url 'https://github.com/noveogroup/android-check/issues'
+        }
         developers {
             developer {
                 name 'Pavel Stepanov'
@@ -44,6 +48,17 @@ project.ext {
                 }
             }
         }
+    }
+    bintray = {
+        user = project.hasProperty('bintray.user') ? project['bintray.user'] : 'anonymous'
+        key = project.hasProperty('bintray.key') ? project['bintray.key'] : 'api-key'
+        repo = 'android-check'
+        tags = ['android', 'plugin', 'check']
+        licenses = ['MIT']
+        issueTracker = 'https://github.com/noveogroup/android-check/issues'
+        vcs = 'https://github.com/noveogroup/android-check'
+        dryRun = false  // whether to run this as dry-run, without deploying
+        publish = false // if version should be auto published after an upload
     }
 }
 

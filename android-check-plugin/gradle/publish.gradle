@@ -30,3 +30,34 @@ publishing {
         }
     }
 }
+
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6' }
+}
+// hack: plugin 'com.jfrog.bintray' is not visible by name
+apply plugin: com.jfrog.bintray.gradle.BintrayPlugin
+// hack: without it bintray property is not visible
+logger.debug("$project.ext.bintray")
+
+bintray {
+    user = project.ext.bintray.user
+    key = project.ext.bintray.key
+    publications = ['maven']
+    dryRun = project.ext.bintray.dryRun
+    publish = project.ext.bintray.publish
+    pkg {
+        repo = project.ext.bintray.repo
+        name = project.name
+        desc = project.description
+        websiteUrl = project.ext.website
+        issueTrackerUrl = project.ext.issueTracker
+        vcsUrl = project.ext.vcs
+        licenses = project.ext.bintray.licenses
+        labels = project.ext.bintray.tags
+        publicDownloadNumbers = true
+        version {
+            name = project.version
+        }
+    }
+}
