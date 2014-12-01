@@ -15,7 +15,7 @@ description = 'Static code analysis plugin for Android project.'
 task wrapper(type: Wrapper) {
     group 'Build Setup'
     description 'Initializes Gradle Wrapper.'
-    gradleVersion = '2.1'
+    gradleVersion = '2.2'
 }
 
 project.ext {
