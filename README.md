@@ -13,7 +13,7 @@ buildscript {
     repositories { jcenter() }
     dependencies {
         ...
-        classpath 'com.noveogroup.android:check:1.0.1'
+        classpath 'com.noveogroup.android:check:1.0.2'
         ...
     }
 }

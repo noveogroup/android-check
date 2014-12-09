@@ -2,7 +2,7 @@ buildscript {
     repositories { jcenter(); mavenLocal() }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
-        classpath 'com.noveogroup.android:check:1.0.1'
+        classpath 'com.noveogroup.android:check:1.0.2'
     }
 }
 

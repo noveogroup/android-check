@@ -55,7 +55,7 @@ public class AndroidPmdPlugin extends AbstractAndroidCheckPlugin {
                 [group      : 'verification',
                  description: 'Runs Android PMD'],
                 'androidPmd') << {
-            CheckExtension check = target.extensions.androidCheckstyle
+            CheckExtension check = target.extensions.androidPmd
 
             File configFile = check.config
             if (configFile == null) configFile = target.file('config/pmd.xml')
