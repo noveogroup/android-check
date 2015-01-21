@@ -4,7 +4,7 @@ apply plugin: 'android-pmd'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '21.1.1'
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         versionCode 1
@@ -16,6 +16,9 @@ android {
     lintOptions { abortOnError false }
 }
 
-androidCheckstyle { abortOnError false }
+androidCheckstyle {
+    abortOnError false
+    config "lite"
+}
 
 androidPmd { abortOnError false }

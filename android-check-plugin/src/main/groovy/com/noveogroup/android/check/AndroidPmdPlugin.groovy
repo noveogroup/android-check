@@ -33,11 +33,12 @@ import org.gradle.api.Project
 
 public class AndroidPmdPlugin extends AbstractAndroidCheckPlugin {
 
-    private PMDTask createPMDTask(Project target, URL configURL, File xmlReport) {
+    private PMDTask createPMDTask(Project target, URL configURL, File xmlReport, boolean failOnError) {
         PMDTask pmdTask = new PMDTask()
 
         pmdTask.project = target.ant.antProject
         pmdTask.ruleSetFiles = configURL.toString()
+        pmdTask.failOnError = failOnError
         pmdTask.addFormatter(new Formatter(type: 'xml', toFile: xmlReport))
 
         getAndroidSources(target).findAll { it.exists() }.each {
@@ -57,16 +58,30 @@ public class AndroidPmdPlugin extends AbstractAndroidCheckPlugin {
                 'androidPmd') << {
             CheckExtension check = target.extensions.androidPmd
 
-            File configFile = check.config
-            if (configFile == null) configFile = target.file('config/pmd.xml')
-            URL config = configFile.toURI().toURL()
+            def rulesetConfig = check.config ?: 'lite'
+            URL config = null
+
+            switch (rulesetConfig) {
+                case File:
+                    config = rulesetConfig.toURI ().toURL ()
+                    break
+                case String:
+                    SeverityChoice severity = SeverityChoice.valueOf (rulesetConfig)
+                    config = target.buildscript.classLoader.getResource (severity.rulesetCheckstyle)
+                    break
+                // todo smart default config
+                // case null:
+                //    config = target.file ('config/pmd.xml').toURI ().toURL ();
+            }
+
+            println "PMD: using $config"
 
             File xmlReport = new File(target.buildDir, 'outputs/pmd/pmd.xml')
             File htmlReport = new File(target.buildDir, 'outputs/pmd/pmd.html')
             String template = target.buildscript.classLoader.getResourceAsStream('pmd/pmd.xsl').text
 
             xmlReport.parentFile.mkdirs()
-            createPMDTask(target, config, xmlReport).perform()
+            createPMDTask(target, config, xmlReport, check.abortOnError).perform()
             htmlReport.parentFile.mkdirs()
             target.ant.xslt(in: xmlReport, out: htmlReport) { style { string(template) } }
 

@@ -34,11 +34,12 @@ import org.gradle.api.Project
 
 public class AndroidCheckstylePlugin extends AbstractAndroidCheckPlugin {
 
-    private CheckStyleTask createCheckStyleTask(Project target, URL configURL, File report) {
+    private CheckStyleTask createCheckStyleTask(Project target, URL configURL, File report, boolean failOnError) {
         CheckStyleTask checkStyleTask = new CheckStyleTask()
 
         checkStyleTask.project = target.ant.antProject
         checkStyleTask.configURL = configURL
+        checkStyleTask.failOnViolation = failOnError
         checkStyleTask.addFormatter(new Formatter(type: new FormatterType(value: 'xml'), tofile: report))
 
         getAndroidSources(target).findAll { it.exists() }.each {
@@ -58,16 +59,30 @@ public class AndroidCheckstylePlugin extends AbstractAndroidCheckPlugin {
                 'androidCheckstyle') << {
             CheckExtension check = target.extensions.androidCheckstyle
 
-            File configFile = check.config
-            if (configFile == null) configFile = target.file('config/checkstyle.xml')
-            URL config = configFile.toURI().toURL()
+            def rulesetConfig = check.config ?: 'lite'
+            URL config = null
+
+            switch (rulesetConfig) {
+                case File:
+                    config = rulesetConfig.toURI ().toURL ()
+                    break
+                case String:
+                    SeverityChoice severity = SeverityChoice.valueOf (rulesetConfig)
+                    config = target.buildscript.classLoader.getResource (severity.rulesetCheckstyle)
+                    break
+                // todo try to find project config first, fall back to embedded lite config if it doesn't exist
+                // case null:
+                //    config = target.file ('config/checkstyle.xml').toURI ().toURL ();
+            }
+
+            println "Checkstyle: using $config"
 
             File xmlReport = new File(target.buildDir, 'outputs/checkstyle/checkstyle.xml')
             File htmlReport = new File(target.buildDir, 'outputs/checkstyle/checkstyle.html')
             String template = target.buildscript.classLoader.getResourceAsStream('checkstyle/checkstyle.xsl').text
 
             xmlReport.parentFile.mkdirs()
-            createCheckStyleTask(target, config, xmlReport).perform()
+            createCheckStyleTask(target, config, xmlReport, check.abortOnError).perform()
             htmlReport.parentFile.mkdirs()
             target.ant.xslt(in: xmlReport, out: htmlReport) { style { string(template) } }
 
