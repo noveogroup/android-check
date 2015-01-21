@@ -60,7 +60,7 @@
         </module>
 
         <!-- Checks for Naming Conventions.                  -->
-        <!-- See http://checkstyle.sourceforge.net/config_naming.html -->
+        <!-- http://checkstyle.sourceforge.net/config_naming.html -->
         <module name="ConstantName" />
         <module name="LocalFinalVariableName" />
         <module name="LocalVariableName" />
@@ -96,14 +96,22 @@
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sourceforge.net/config_whitespace.html -->
         <module name="EmptyForIteratorPad" />
-        <module name="GenericWhitespace" />
+        <module name="GenericWhitespace">
+            <property name="severity" value="ignore" />
+        </module>
         <module name="MethodParamPad" />
-        <module name="NoWhitespaceAfter" />
-        <module name="NoWhitespaceBefore" />
+        <module name="NoWhitespaceAfter">
+            <property name="severity" value="ignore" />
+        </module>
+        <module name="NoWhitespaceBefore">
+            <property name="severity" value="ignore" />
+        </module>
         <module name="OperatorWrap" />
         <module name="ParenPad" />
         <module name="TypecastParenPad" />
-        <module name="WhitespaceAfter" />
+        <module name="WhitespaceAfter">
+            <property name="severity" value="ignore" />
+        </module>
         <module name="WhitespaceAround" />
 
         <!-- Modifier Checks                                    -->
@@ -136,7 +144,7 @@
         <module name="InnerAssignment" />
         <module name="MagicNumber">
             <property name="severity" value="info" />
-            <property name="ignoreNumbers" value="-1, 0, 1, 2, 10, 60, 100, 256, 1000" />
+            <property name="ignoreNumbers" value="-1, 0, 1, 2, 5, 10, 12, 24, 60, 100, 180, 256, 360, 1000" />
         </module>
         <module name="MissingSwitchDefault">
             <property name="severity" value="ignore" />

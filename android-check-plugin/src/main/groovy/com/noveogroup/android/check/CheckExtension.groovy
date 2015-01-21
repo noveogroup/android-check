@@ -32,8 +32,9 @@ public class CheckExtension {
 
     void abortOnError(boolean abortOnError) { this.abortOnError = abortOnError }
 
-    File config = null
+    def config = null
 
     void config(File config) { this.config = config }
 
+    void config(String config) { this.config = config }
 }
