@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Noveo Group
+ * Copyright (c) 2015 Noveo Group
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,27 @@
  * THE SOFTWARE.
  */
 
-package com.noveogroup.android.check;
+package com.noveogroup.android.check.common
 
-import org.gradle.api.Plugin;
-import org.gradle.api.Project;
+import org.gradle.api.Project
 
-import java.io.File;
-import java.util.List;
+import java.util.jar.JarEntry
+import java.util.jar.JarFile
 
-public abstract class AbstractAndroidCheckPlugin implements Plugin<Project> {
+final class Utils {
 
-    public List<File> getAndroidSources(Project target) {
-        target.android.sourceSets.inject([]) {
+    private Utils() { throw new UnsupportedOperationException() }
+
+    static String getResource(Project project, String resourcePath) {
+        Set<File> files = project.rootProject.buildscript.configurations.classpath.resolve()
+        File file = files.find { new JarFile(it).getJarEntry(resourcePath) }
+        JarFile jarFile = new JarFile(file)
+        JarEntry jarEntry = jarFile.getJarEntry(resourcePath)
+        return jarFile.getInputStream(jarEntry).text
+    }
+
+    static List<File> getAndroidSources(Project project) {
+        project.android.sourceSets.inject([]) {
             dirs, sourceSet -> dirs + sourceSet.java.srcDirs
         }
     }

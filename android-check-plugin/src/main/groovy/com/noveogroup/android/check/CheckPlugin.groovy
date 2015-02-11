@@ -26,33 +26,19 @@
 
 package com.noveogroup.android.check
 
-import com.noveogroup.android.check.checkstyle.CheckstyleConfig
-import com.noveogroup.android.check.pmd.PmdConfig
-import org.gradle.api.Action
+import com.noveogroup.android.check.checkstyle.CheckstyleCheck
+import com.noveogroup.android.check.pmd.PmdCheck
+import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class CheckExtension {
+class CheckPlugin implements Plugin<Project> {
 
-    static final String NAME = 'check'
+    @Override
+    void apply(Project target) {
+        target.extensions.create(CheckExtension.NAME, CheckExtension, target)
 
-    private final Project project
-
-    CheckstyleConfig checkstyle
-
-    void checkstyle(Action<CheckstyleConfig> action) { action.execute(checkstyle) }
-
-    PmdConfig pmd
-
-    void pmd(Action<PmdConfig> action) { action.execute(pmd) }
-
-    CheckExtension(Project project) {
-        this.project = project
-        this.checkstyle = new CheckstyleConfig(project)
-        this.pmd = new PmdConfig(project)
+        new CheckstyleCheck().apply(target)
+        new PmdCheck().apply(target)
     }
-
-    boolean abortOnError = false
-
-    void abortOnError(boolean abortOnError) { this.abortOnError = abortOnError }
 
 }

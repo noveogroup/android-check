@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-checkstyle'
-apply plugin: 'android-pmd'
+apply plugin: 'com.noveogroup.android.check'
 
 android {
     compileSdkVersion 21
@@ -16,6 +15,15 @@ android {
     lintOptions { abortOnError false }
 }
 
-androidCheckstyle { abortOnError false }
+check {
+    abortOnError false
 
-androidPmd { abortOnError false }
+    checkstyle {
+        abortOnError false
+        config 'EASY'
+    }
+
+    pmd {
+        abortOnError false
+    }
+}

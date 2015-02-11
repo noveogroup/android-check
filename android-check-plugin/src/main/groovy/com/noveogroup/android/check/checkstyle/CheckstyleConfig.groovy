@@ -24,35 +24,13 @@
  * THE SOFTWARE.
  */
 
-package com.noveogroup.android.check
+package com.noveogroup.android.check.checkstyle
 
-import com.noveogroup.android.check.checkstyle.CheckstyleConfig
-import com.noveogroup.android.check.pmd.PmdConfig
-import org.gradle.api.Action
+import com.noveogroup.android.check.common.CommonConfig
 import org.gradle.api.Project
 
-class CheckExtension {
+class CheckstyleConfig extends CommonConfig {
 
-    static final String NAME = 'check'
-
-    private final Project project
-
-    CheckstyleConfig checkstyle
-
-    void checkstyle(Action<CheckstyleConfig> action) { action.execute(checkstyle) }
-
-    PmdConfig pmd
-
-    void pmd(Action<PmdConfig> action) { action.execute(pmd) }
-
-    CheckExtension(Project project) {
-        this.project = project
-        this.checkstyle = new CheckstyleConfig(project)
-        this.pmd = new PmdConfig(project)
-    }
-
-    boolean abortOnError = false
-
-    void abortOnError(boolean abortOnError) { this.abortOnError = abortOnError }
+    CheckstyleConfig(Project project) { super(project) }
 
 }

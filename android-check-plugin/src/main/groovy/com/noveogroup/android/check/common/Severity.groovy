@@ -24,35 +24,20 @@
  * THE SOFTWARE.
  */
 
-package com.noveogroup.android.check
+package com.noveogroup.android.check.common;
 
-import com.noveogroup.android.check.checkstyle.CheckstyleConfig
-import com.noveogroup.android.check.pmd.PmdConfig
-import org.gradle.api.Action
-import org.gradle.api.Project
+enum Severity {
 
-class CheckExtension {
+    EASY('easy'), HARD('hard')
 
-    static final String NAME = 'check'
-
-    private final Project project
-
-    CheckstyleConfig checkstyle
-
-    void checkstyle(Action<CheckstyleConfig> action) { action.execute(checkstyle) }
-
-    PmdConfig pmd
-
-    void pmd(Action<PmdConfig> action) { action.execute(pmd) }
-
-    CheckExtension(Project project) {
-        this.project = project
-        this.checkstyle = new CheckstyleConfig(project)
-        this.pmd = new PmdConfig(project)
+    static Severity parse(String severity) {
+        return values().find { it.name().equalsIgnoreCase(severity) }
     }
 
-    boolean abortOnError = false
+    private final String suffix
 
-    void abortOnError(boolean abortOnError) { this.abortOnError = abortOnError }
+    private Severity(String suffix) { this.suffix = suffix }
+
+    String getSuffix() { return suffix }
 
 }
