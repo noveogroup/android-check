@@ -50,6 +50,9 @@ class PmdCheck extends CommonCheck {
         pmdTask.ruleSetFiles = configFile.toString()
         pmdTask.addFormatter(new Formatter(type: 'xml', toFile: xmlReportFile))
 
+        pmdTask.failOnError = false
+        pmdTask.failOnRuleViolation = false
+
         sources.findAll { it.exists() }.each {
             pmdTask.addFileset(project.ant.fileset(dir: it))
         }

@@ -51,6 +51,8 @@ class CheckstyleCheck extends CommonCheck {
         checkStyleTask.configURL = configFile.toURI().toURL()
         checkStyleTask.addFormatter(new Formatter(type: new FormatterType(value: 'xml'), tofile: xmlReportFile))
 
+        checkStyleTask.failOnViolation = false
+
         sources.findAll { it.exists() }.each {
             checkStyleTask.addFileset(project.ant.fileset(dir: it))
         }
