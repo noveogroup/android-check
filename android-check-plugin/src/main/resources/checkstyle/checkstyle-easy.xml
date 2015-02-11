@@ -69,10 +69,16 @@ Severity: EASY
         <module name="LocalFinalVariableName" />
         <module name="LocalVariableName" />
         <module name="MemberName" />
-        <module name="MethodName" />
+        <module name="MethodName">
+            <property name="severity" value="ignore" />
+        </module>
         <module name="PackageName" />
-        <module name="ParameterName" />
-        <module name="StaticVariableName" />
+        <module name="ParameterName">
+            <property name="severity" value="ignore" />
+        </module>
+        <module name="StaticVariableName">
+            <property name="severity" value="ignore" />
+        </module>
         <module name="TypeName" />
 
         <!-- Checks for imports                              -->
@@ -87,11 +93,7 @@ Severity: EASY
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <module name="LineLength">
-            <!-- what is a good max value? -->
-            <property name="max" value="150" />
-            <!-- ignore lines like "$File: //depot/... $" -->
-            <property name="ignorePattern" value="\$File.*\$" />
-            <property name="severity" value="info" />
+            <property name="severity" value="ignore" />
         </module>
         <module name="MethodLength" />
         <module name="ParameterNumber" />
@@ -108,7 +110,9 @@ Severity: EASY
         <module name="ParenPad" />
         <module name="TypecastParenPad" />
         <module name="WhitespaceAfter" />
-        <module name="WhitespaceAround" />
+        <module name="WhitespaceAround">
+            <property name="severity" value="ignore" />
+        </module>
 
         <!-- Modifier Checks                                    -->
         <!-- See http://checkstyle.sf.net/config_modifiers.html -->
@@ -123,7 +127,9 @@ Severity: EASY
             <property name="option" value="text" />
         </module>
         <module name="LeftCurly" />
-        <module name="NeedBraces" />
+        <module name="NeedBraces">
+            <property name="severity" value="ignore" />
+        </module>
         <module name="RightCurly" />
 
 
@@ -132,15 +138,12 @@ Severity: EASY
         <module name="EmptyStatement" />
         <module name="EqualsHashCode" />
         <module name="HiddenField">
-            <property name="ignoreConstructorParameter" value="true" />
-            <property name="ignoreSetter" value="true" />
-            <property name="severity" value="warning" />
+            <property name="severity" value="ignore" />
         </module>
         <module name="IllegalInstantiation" />
         <module name="InnerAssignment" />
         <module name="MagicNumber">
-            <property name="severity" value="info" />
-            <property name="ignoreNumbers" value="-1, 0, 1, 2, 10, 60, 100, 256, 1000" />
+            <property name="severity" value="ignore" />
         </module>
         <module name="MissingSwitchDefault">
             <property name="severity" value="ignore" />
@@ -159,7 +162,9 @@ Severity: EASY
         <module name="FinalClass" />
         <module name="HideUtilityClassConstructor" />
         <module name="InterfaceIsType" />
-        <module name="VisibilityModifier" />
+        <module name="VisibilityModifier">
+            <property name="severity" value="ignore" />
+        </module>
 
 
         <!-- Miscellaneous other checks.                   -->
