@@ -37,6 +37,10 @@ class CommonConfig {
         this.project = project
     }
 
+    Boolean skip = null
+
+    void skip(boolean skip) { this.skip = skip }
+
     Boolean abortOnError = null
 
     void abortOnError(boolean abortOnError) { this.abortOnError = abortOnError }
@@ -67,6 +71,10 @@ class CommonConfig {
         if (!configSeverity) {
             throw new IllegalArgumentException("wrong severity $severity. allowed values are: ${Severity.values()}")
         }
+    }
+
+    boolean resolveSkip(boolean defaultSkip) {
+        return skip == null ? defaultSkip : skip
     }
 
     boolean resolveAbortOnError(boolean defaultAbortOnError) {

@@ -19,6 +19,7 @@ check {
     abortOnError false
 
     checkstyle {
+        skip true
         abortOnError false
         config 'EASY'
     }
