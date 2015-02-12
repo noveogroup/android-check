@@ -30,10 +30,6 @@ enum Severity {
 
     EASY('easy'), HARD('hard')
 
-    static Severity parse(String severity) {
-        return values().find { it.name().equalsIgnoreCase(severity) }
-    }
-
     private final String suffix
 
     private Severity(String suffix) { this.suffix = suffix }

@@ -65,12 +65,17 @@ class CommonConfig {
         this.configFile = file
     }
 
-    void config(String severity) {
+    void config(String path) {
+        config(project.file(path))
+    }
+
+    Severity easy() { Severity.EASY }
+
+    Severity hard() { Severity.HARD }
+
+    void config(Severity severity) {
         checkConfigDefined()
-        this.configSeverity = Severity.parse(severity)
-        if (!configSeverity) {
-            throw new IllegalArgumentException("wrong severity $severity. allowed values are: ${Severity.values()}")
-        }
+        this.configSeverity = severity
     }
 
     boolean resolveSkip(boolean defaultSkip) {
