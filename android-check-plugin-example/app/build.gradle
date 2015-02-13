@@ -19,11 +19,11 @@ check {
     abortOnError false
 
     checkstyle {
-        skip true
         abortOnError false
     }
 
     pmd {
+        skip true
         abortOnError false
         config hard()
     }

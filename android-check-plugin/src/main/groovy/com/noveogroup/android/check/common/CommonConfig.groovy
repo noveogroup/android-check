@@ -108,6 +108,7 @@ class CommonConfig {
     File resolveConfigFile(String code) {
         File file = new File(project.buildDir, "tmp/android-check/${code}.xml")
         file.parentFile.mkdirs()
+        file.delete()
         file << resolveConfig(code)
         return file
     }
@@ -119,6 +120,7 @@ class CommonConfig {
     File resolveStyleFile(String code) {
         File file = new File(project.buildDir, "tmp/android-check/${code}.xsl")
         file.parentFile.mkdirs()
+        file.delete()
         file << resolveStyle(code)
         return file
     }
