@@ -1,6 +1,8 @@
 Android Check
 =============
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--check-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1530)
+
 Static code analysis plugin for Android project.
 
 Usage
