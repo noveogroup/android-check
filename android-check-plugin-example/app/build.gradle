@@ -21,10 +21,10 @@ check {
     checkstyle {
         skip true
         abortOnError false
-        config 'EASY'
     }
 
     pmd {
         abortOnError false
+        config hard()
     }
 }
