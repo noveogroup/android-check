@@ -13,25 +13,85 @@ buildscript {
     repositories { jcenter() }
     dependencies {
         ...
-        classpath 'com.noveogroup.android:check:1.0.2'
+        classpath 'com.noveogroup.android:check:1.1.0'
         ...
     }
 }
 
-apply plugin: 'android-checkstyle'
-androidCheckstyle {
-  abortOnError false
-  config file('path/to/your/checkstyle.xml')
-}
+apply plugin: 'com.noveogroup.android.check'
+```
 
-apply plugin: 'android-pmd'
-androidPmd {
-  abortOnError false
-  config file('path/to/your/pom.xml')
+Configuration
+-------------
+
+### Recommended
+
+Recommended configuration is a default one.
+
+### Hardcore
+
+```groovy
+check {
+  abortOnError true
+  checkstyle { config hard() }
+  pmd { config hard() }
 }
 ```
 
-[![Download](https://api.bintray.com/packages/noveo-nsk/android-check/check/images/download.svg) ](https://bintray.com/noveo-nsk/android-check/check/_latestVersion)
+### Skip checking
+
+```groovy
+check { skip true }
+```
+
+Skip Checkstyle only
+
+```groovy
+check { checkstyle { skip true } }
+```
+
+Skip PMD only
+
+```groovy
+check { pmd { skip true } }
+```
+
+### Description
+
+```groovy
+// configuration is optional
+check {
+  // skip source code checking or not, false by deafult
+  skip true/false
+  // fails build if code style violation is found, false by default
+  abortOnError true/false
+  // configuration of Checkstyle checker
+  checkstyle {
+    // skip Checkstyle, false by deafult
+    skip true/false
+    // fails build if Checkstyle rule violation is found, false by default
+    abortOnError true/false
+    // configuration file
+    config project.file('path/to/checkstyle.xml')
+    // configuration resource
+    // see http://gradle.org/docs/2.2/release-notes#sharing-configuration-files-across-builds
+    config resources.text.fromFile(someTask)
+    // configuration path
+    config 'path/to/checkstyle.xml'
+    // predefined configurations: easy and hard
+    config easy()
+    config hard()
+    // plugin find configuration file in project.file('config/checkstyle.xml') by default
+    // if there are no configuration file, easy() configuration will be used
+  }
+  // configuration of PMD checker
+  pmd {
+    // the same configuration as for Checkstyle
+    // plugin find configuration file in project.file('config/pmd.xml') by default
+    // if there are no configuration file, easy() configuration will be used
+  }
+}
+```
 
 Developed By
 ============
