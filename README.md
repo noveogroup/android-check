@@ -28,7 +28,11 @@ Configuration
 
 ### Recommended
 
-Recommended configuration is a default one.
+Recommended configuration is a default one (empty).
+
+```groovy
+// no configuration
+```
 
 ### Hardcore
 
