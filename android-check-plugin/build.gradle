@@ -26,8 +26,10 @@ task wrapper(type: Wrapper) {
 }
 
 project.ext {
+    plugin = 'com.noveogroup.android.check'
     name = 'Android Check Plugin'
     website = 'https://github.com/noveogroup/android-check'
+    scm = 'https://github.com/noveogroup/android-check'
     pom = {
         licenses {
             license {
@@ -37,7 +39,7 @@ project.ext {
             }
         }
         scm {
-            url 'https://github.com/noveogroup/android-check'
+            url project.ext.scm
             connection 'scm:git@github.com:noveogroup/android-check.git'
             developerConnection 'scm:git@github.com:noveogroup/android-check.git'
         }
@@ -69,4 +71,5 @@ project.ext {
     }
 }
 
+apply from: rootProject.file('gradle/gradle-publish.gradle')
 apply from: rootProject.file('gradle/publish.gradle')
