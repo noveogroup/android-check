@@ -8,7 +8,7 @@ Static code analysis plugin for Android project.
 Usage
 -----
 
-Modifications in `build.gradle`:
+Modifications in `<project_dir>/build.gradle`:
 
 ```groovy
 buildscript {
@@ -19,7 +19,11 @@ buildscript {
         ...
     }
 }
+```
 
+Modifications in `<project_dir>/<module_name>/build.gradle`:
+
+```groovy
 apply plugin: 'com.noveogroup.android.check'
 ```
 
