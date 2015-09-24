@@ -15,7 +15,7 @@ buildscript {
     repositories { jcenter() }
     dependencies {
         ...
-        classpath 'com.noveogroup.android:check:1.2.0'
+        classpath 'com.noveogroup.android:check:1.2.1'
         ...
     }
 }
@@ -86,8 +86,10 @@ check {
   checkstyle {
     // skip Checkstyle, false by deafult
     skip true/false
+
     // fails build if Checkstyle rule violation is found, false by default
     abortOnError true/false
+
     // configuration file
     config project.file('path/to/checkstyle.xml')
     // configuration resource
@@ -98,20 +100,32 @@ check {
     // predefined configurations: easy and hard
     config easy()
     config hard()
-    // plugin find configuration file in project.file('config/checkstyle.xml') by default
-    // if there are no configuration file, easy() configuration will be used
+    // be defaul plugin finds configuration file in <rootProject>/config/checkstyle.xml,
+    // after that in <project>/config/checkstyle.xml and if there are no configuration
+    // file, easy() configuration will be used.
+
+    // directory for report files
+    report new File(project.buildDir, 'reports/pmd')
+    // XML report file
+    reportXML new File(project.buildDir, 'reports/findbugs/findbugs.xml')
+    // HTML report file
+    reportHTML new File(project.buildDir, 'reports/findbugs/findbugs.html')
   }
   // configuration of FindBugs checker
   findbugs {
     // the same configuration as for Checkstyle
-    // plugin find configuration file in project.file('config/findbugs.xml') by default
-    // if there are no configuration file, easy() configuration will be used
+
+    // be defaul plugin finds configuration file in <rootProject>/config/findbugs.xml,
+    // after that in <project>/config/findbugs.xml and if there are no configuration
+    // file, easy() configuration will be used.
   }
   // configuration of PMD checker
   pmd {
     // the same configuration as for Checkstyle
-    // plugin find configuration file in project.file('config/pmd.xml') by default
-    // if there are no configuration file, easy() configuration will be used
+
+    // be defaul plugin finds configuration file in <rootProject>/config/pmd.xml,
+    // after that in <project>/config/pmd.xml and if there are no configuration
+    // file, easy() configuration will be used.
   }
 }
 ```
