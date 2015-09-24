@@ -15,7 +15,7 @@ buildscript {
     repositories { jcenter() }
     dependencies {
         ...
-        classpath 'com.noveogroup.android:check:1.1.2'
+        classpath 'com.noveogroup.android:check:1.2.0'
         ...
     }
 }
@@ -44,6 +44,7 @@ Recommended configuration is a default one (empty).
 check {
   abortOnError true
   checkstyle { config hard() }
+  findbugs { config hard() }
   pmd { config hard() }
 }
 ```
@@ -58,6 +59,12 @@ Skip Checkstyle only
 
 ```groovy
 check { checkstyle { skip true } }
+```
+
+Skip FindBugs only
+
+```groovy
+check { findbugs { skip true } }
 ```
 
 Skip PMD only
@@ -92,6 +99,12 @@ check {
     config easy()
     config hard()
     // plugin find configuration file in project.file('config/checkstyle.xml') by default
+    // if there are no configuration file, easy() configuration will be used
+  }
+  // configuration of FindBugs checker
+  findbugs {
+    // the same configuration as for Checkstyle
+    // plugin find configuration file in project.file('config/findbugs.xml') by default
     // if there are no configuration file, easy() configuration will be used
   }
   // configuration of PMD checker
