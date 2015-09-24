@@ -13,6 +13,20 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Object object = "";
+                    Double value = (Double) object;
+                } catch (Exception e) {
+
+                }
+
+                "".length();
+            }
+        }.start();
     }
 
 }

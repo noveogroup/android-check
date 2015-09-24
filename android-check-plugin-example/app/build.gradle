@@ -27,7 +27,6 @@ check {
     }
 
     pmd {
-        skip true
         abortOnError false
         config hard()
     }
