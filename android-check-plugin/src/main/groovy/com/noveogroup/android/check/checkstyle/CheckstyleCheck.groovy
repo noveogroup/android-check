@@ -29,9 +29,9 @@ package com.noveogroup.android.check.checkstyle
 import com.noveogroup.android.check.CheckExtension
 import com.noveogroup.android.check.common.CommonCheck
 import com.noveogroup.android.check.common.CommonConfig
-import com.puppycrawl.tools.checkstyle.CheckStyleTask
-import com.puppycrawl.tools.checkstyle.CheckStyleTask.Formatter
-import com.puppycrawl.tools.checkstyle.CheckStyleTask.FormatterType
+import com.puppycrawl.tools.checkstyle.ant.CheckstyleAntTask
+import com.puppycrawl.tools.checkstyle.ant.CheckstyleAntTask.Formatter
+import com.puppycrawl.tools.checkstyle.ant.CheckstyleAntTask.FormatterType
 import groovy.util.slurpersupport.GPathResult
 import org.gradle.api.Project
 
@@ -45,7 +45,7 @@ class CheckstyleCheck extends CommonCheck {
     @Override
     protected void performCheck(Project project, List<File> sources,
                                 File configFile, File xmlReportFile) {
-        CheckStyleTask checkStyleTask = new CheckStyleTask()
+        CheckstyleAntTask checkStyleTask = new CheckstyleAntTask()
 
         checkStyleTask.project = project.ant.antProject
         checkStyleTask.configURL = configFile.toURI().toURL()
