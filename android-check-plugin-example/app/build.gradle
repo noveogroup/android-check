@@ -25,9 +25,11 @@ check {
     findbugs {
         abortOnError false
         config hard()
+        reportXML new File(project.buildDir, 'reports/findbugs/findbugs.xml')
     }
 
     pmd {
         abortOnError false
+        report new File(project.buildDir, 'reports/pmd')
     }
 }
