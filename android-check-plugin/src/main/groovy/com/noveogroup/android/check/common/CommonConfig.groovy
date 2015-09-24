@@ -102,6 +102,11 @@ class CommonConfig {
             return file.text
         }
 
+        File rootFile = project.rootProject.file("config/${code}.xml")
+        if (rootFile.exists()) {
+            return rootFile.text
+        }
+
         return Utils.getResource(project, "$code/$code-${Severity.EASY.suffix}.xml")
     }
 

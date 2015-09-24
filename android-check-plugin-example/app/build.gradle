@@ -24,10 +24,10 @@ check {
 
     findbugs {
         abortOnError false
+        config hard()
     }
 
     pmd {
         abortOnError false
-        config hard()
     }
 }

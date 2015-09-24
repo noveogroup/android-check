@@ -4,6 +4,7 @@
     "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
     "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
+<!-- Custom Checkstyle config-->
 <module name="Checker">
 
     <!-- Checks whether files end with a new line.                        -->
