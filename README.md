@@ -100,7 +100,7 @@ check {
     // predefined configurations: easy and hard
     config easy()
     config hard()
-    // be defaul plugin finds configuration file in <rootProject>/config/checkstyle.xml,
+    // by default plugin finds configuration file in <rootProject>/config/checkstyle.xml,
     // after that in <project>/config/checkstyle.xml and if there are no configuration
     // file, easy() configuration will be used.
 
@@ -115,7 +115,7 @@ check {
   findbugs {
     // the same configuration as for Checkstyle
 
-    // be defaul plugin finds configuration file in <rootProject>/config/findbugs.xml,
+    // by default plugin finds configuration file in <rootProject>/config/findbugs.xml,
     // after that in <project>/config/findbugs.xml and if there are no configuration
     // file, easy() configuration will be used.
   }
@@ -123,7 +123,7 @@ check {
   pmd {
     // the same configuration as for Checkstyle
 
-    // be defaul plugin finds configuration file in <rootProject>/config/pmd.xml,
+    // by default plugin finds configuration file in <rootProject>/config/pmd.xml,
     // after that in <project>/config/pmd.xml and if there are no configuration
     // file, easy() configuration will be used.
   }
