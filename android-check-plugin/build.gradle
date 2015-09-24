@@ -19,7 +19,7 @@ dependencies {
 }
 
 group = 'com.noveogroup.android'
-version = '1.1.2'
+version = '1.2.0'
 description = 'Static code analysis plugin for Android project.'
 
 task wrapper(type: Wrapper) {
