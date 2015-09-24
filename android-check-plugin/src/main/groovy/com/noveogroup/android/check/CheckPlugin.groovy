@@ -27,6 +27,7 @@
 package com.noveogroup.android.check
 
 import com.noveogroup.android.check.checkstyle.CheckstyleCheck
+import com.noveogroup.android.check.findbugs.FindbugsCheck
 import com.noveogroup.android.check.pmd.PmdCheck
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -38,6 +39,7 @@ class CheckPlugin implements Plugin<Project> {
         target.extensions.create(CheckExtension.NAME, CheckExtension, target)
 
         new CheckstyleCheck().apply(target)
+        new FindbugsCheck().apply(target)
         new PmdCheck().apply(target)
     }
 

@@ -24,45 +24,13 @@
  * THE SOFTWARE.
  */
 
-package com.noveogroup.android.check
+package com.noveogroup.android.check.findbugs
 
-import com.noveogroup.android.check.checkstyle.CheckstyleConfig
-import com.noveogroup.android.check.findbugs.FindbugsConfig
-import com.noveogroup.android.check.pmd.PmdConfig
-import org.gradle.api.Action
+import com.noveogroup.android.check.common.CommonConfig
 import org.gradle.api.Project
 
-class CheckExtension {
+class FindbugsConfig extends CommonConfig {
 
-    static final String NAME = 'check'
-
-    private final Project project
-
-    CheckstyleConfig checkstyle
-
-    void checkstyle(Action<CheckstyleConfig> action) { action.execute(checkstyle) }
-
-    FindbugsConfig findbugs
-
-    void findbugs(Action<FindbugsConfig> action) { action.execute(findbugs) }
-
-    PmdConfig pmd
-
-    void pmd(Action<PmdConfig> action) { action.execute(pmd) }
-
-    CheckExtension(Project project) {
-        this.project = project
-        this.checkstyle = new CheckstyleConfig(project)
-        this.findbugs = new FindbugsConfig(project)
-        this.pmd = new PmdConfig(project)
-    }
-
-    boolean skip = false
-
-    void skip(boolean skip) { this.skip = skip }
-
-    boolean abortOnError = false
-
-    void abortOnError(boolean abortOnError) { this.abortOnError = abortOnError }
+    FindbugsConfig(Project project) { super(project) }
 
 }
