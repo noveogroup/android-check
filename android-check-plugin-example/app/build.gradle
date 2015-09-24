@@ -22,6 +22,10 @@ check {
         abortOnError false
     }
 
+    findbugs {
+        abortOnError false
+    }
+
     pmd {
         skip true
         abortOnError false
