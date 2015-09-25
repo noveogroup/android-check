@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.noveogroup.example">
+    package="my.example">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,7 +11,7 @@
         android:label="@string/application_name">
 
         <activity
-            android:name=".MainActivity"
+            android:name="example.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

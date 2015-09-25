@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+    <!-- Create a logcat appender -->
+    <appender name="logcat" class="ch.qos.logback.classic.android.LogcatAppender">
+        <tagEncoder>
+            <pattern>Example%nopex</pattern>
+        </tagEncoder>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %logger - %msg</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Write DEBUG (and higher-level) messages to the logcat appender -->
+    <root level="DEBUG">
+        <appender-ref ref="logcat" />
+    </root>
+</configuration>

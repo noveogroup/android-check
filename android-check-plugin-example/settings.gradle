@@ -1,1 +1,3 @@
+include ':libs:sample-android-library'
+include ':libs:sample-java-library'
 include ':app'

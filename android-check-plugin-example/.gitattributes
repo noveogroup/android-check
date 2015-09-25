@@ -1,0 +1,10 @@
+# Default
+* text=auto
+
+# Andriod
+*.gradle       text
+*.java         text
+*.properties   text
+*.xml          text
+/gradlew       text eol=lf
+/gradlew.bat   text eol=crlf
