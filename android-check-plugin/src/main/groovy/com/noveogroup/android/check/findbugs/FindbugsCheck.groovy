@@ -31,6 +31,7 @@ import com.noveogroup.android.check.common.CommonCheck
 import com.noveogroup.android.check.common.CommonConfig
 import edu.umd.cs.findbugs.anttask.FindBugsTask
 import groovy.util.slurpersupport.GPathResult
+import org.apache.tools.ant.types.FileSet
 import org.apache.tools.ant.types.Path
 import org.gradle.api.Project
 
@@ -67,7 +68,19 @@ class FindbugsCheck extends CommonCheck {
             classpath.createPathElement().location = it
         }
 
-        findBugsTask.createClass()
+        Set<String> includes = []
+        sources.findAll { it.exists() }.each { File directory ->
+            FileSet fileSet = project.ant.fileset(dir: directory)
+            Path path = project.ant.path()
+            path.addFileset(fileSet)
+
+            path.each {
+                String includePath = new File(it.toString()).absolutePath - directory.absolutePath
+                includes.add("**${includePath.replaceAll('\\.java$', '')}*")
+            }
+        }
+
+        findBugsTask.addFileset(project.ant.fileset(dir: project.buildDir, includes: includes.join(',')))
 
         findBugsTask.perform()
     }
