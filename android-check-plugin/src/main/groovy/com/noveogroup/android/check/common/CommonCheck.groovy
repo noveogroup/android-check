@@ -42,6 +42,8 @@ abstract class CommonCheck<Config extends CommonConfig> {
         this.taskDescription = taskDescription
     }
 
+    protected Set<String> getDependencies() { [] }
+
     protected abstract Config getConfig(CheckExtension extension)
 
     protected abstract void performCheck(Project project, List<File> sources,
@@ -95,6 +97,7 @@ abstract class CommonCheck<Config extends CommonConfig> {
         }
 
         target.tasks.getByName('check').dependsOn taskName
+        dependencies.each { target.tasks.getByName(taskName).dependsOn it }
     }
 
 }

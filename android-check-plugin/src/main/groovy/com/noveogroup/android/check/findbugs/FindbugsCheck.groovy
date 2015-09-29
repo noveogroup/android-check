@@ -40,6 +40,9 @@ class FindbugsCheck extends CommonCheck {
     FindbugsCheck() { super('findbugs', 'androidFindbugs', 'Runs Android FindBugs') }
 
     @Override
+    protected Set<String> getDependencies() { ['assemble'] }
+
+    @Override
     protected CommonConfig getConfig(CheckExtension extension) { return extension.findbugs }
 
     @Override
