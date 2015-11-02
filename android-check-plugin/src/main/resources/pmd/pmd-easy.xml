@@ -73,7 +73,7 @@ Severity: EASY
         <exclude name="ImmutableField" />
         <exclude name="GodClass" />
         <exclude name="SingularField" />
-        <exclude name="UncommentedEmptyMethod" />
+        <exclude name="UncommentedEmptyMethodBody" />
         <exclude name="EmptyMethodInAbstractClassShouldBeAbstract" />
     </rule>
 
