@@ -138,11 +138,23 @@ class CommonConfig {
         return Utils.getResource(project, "$code/${code}.xsl")
     }
 
+    private String resolveStdoutStyle(String code) {
+        return Utils.getResource(project, "$code/${code}.stdout.xsl")
+    }
+
     File resolveStyleFile(String code) {
         File file = new File(project.buildDir, "tmp/android-check/${code}.xsl")
         file.parentFile.mkdirs()
         file.delete()
         file << resolveStyle(code)
+        return file
+    }
+
+    File resolveStdoutStyleFile(String code) {
+        File file = new File(project.buildDir, "tmp/android-check/${code}.stdout.xsl")
+        file.parentFile.mkdirs()
+        file.delete()
+        file << resolveStdoutStyle(code)
         return file
     }
 

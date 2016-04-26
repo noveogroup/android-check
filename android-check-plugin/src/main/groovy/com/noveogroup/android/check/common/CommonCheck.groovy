@@ -60,6 +60,16 @@ abstract class CommonCheck<Config extends CommonConfig> {
         }
     }
 
+    protected void reformatReport(Project project, File styleFile,
+                                  File xmlReportFile) {
+        def temp = File.createTempFile('android-check', '.txt')
+        project.ant.xslt(in: xmlReportFile, out: temp) {
+            style { string(styleFile.text) }
+        }
+        System.out << temp.text
+        System.out.flush()
+    }
+
     void apply(Project target) {
         target.task(
                 [group      : 'verification',
@@ -72,6 +82,7 @@ abstract class CommonCheck<Config extends CommonConfig> {
             boolean abortOnError = config.resolveAbortOnError(extension.abortOnError)
             File configFile = config.resolveConfigFile(taskCode)
             File styleFile = config.resolveStyleFile(taskCode)
+            File stdoutStyleFile = config.resolveStdoutStyleFile(taskCode)
             File xmlReportFile = config.resolveXmlReportFile(taskCode)
             File htmlReportFile = config.resolveHtmlReportFile(taskCode)
             List<File> sources = config.getAndroidSources()
@@ -83,6 +94,7 @@ abstract class CommonCheck<Config extends CommonConfig> {
                 performCheck(target, sources, configFile, xmlReportFile)
                 htmlReportFile.parentFile.mkdirs()
                 reformatReport(target, styleFile, xmlReportFile, htmlReportFile)
+                reformatReport(target, stdoutStyleFile, xmlReportFile)
 
                 int errorCount = getErrorCount(xmlReportFile)
                 if (errorCount) {
