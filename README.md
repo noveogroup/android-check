@@ -4,6 +4,12 @@ Android Check 2
 Static code analysis plugin for Android project.  
 This is a fork of [the original android-check plugin][1], which implements a really useful concept, but unfortunately seems abandoned.
 
+Build status
+------------
+
+### master [![master](https://travis-ci.org/stoyicker/android-check-2.svg?branch=master)](https://travis-ci.org/stoyicker/android-check-2)  
+### dev [![dev](https://travis-ci.org/stoyicker/android-check-2.svg?branch=dev)](https://travis-ci.org/stoyicker/android-check-2)
+
 Usage
 -----
 

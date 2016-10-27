@@ -1,9 +1,0 @@
-# Android
-local.properties
-
-# Gradle
-.gradle
-build
-
-# IntelliJ Idea
-.idea
