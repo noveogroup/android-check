@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
-<!--
-PMD Configuration
-Severity: EASY
--->
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ruleset"
     xmlns="http://pmd.sf.net/ruleset/1.0.0"
     xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"

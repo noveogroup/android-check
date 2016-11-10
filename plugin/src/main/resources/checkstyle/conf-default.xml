@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
 <!DOCTYPE module PUBLIC
     "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
     "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
-
-<!--
-Checkstyle Configuration
-Severity: EASY
--->
 <module name="Checker">
 
     <!-- Checks whether files end with a new line.                        -->

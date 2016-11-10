@@ -47,10 +47,9 @@ class CommonConfig {
 
     private TextResource configResource = null
     private File configFile = null
-    private Severity configSeverity = null
 
     private void checkConfigDefined() {
-        if (configResource || configFile || configSeverity) {
+        if (configResource || configFile) {
             throw new IllegalArgumentException('configuration XML is already defined')
         }
     }
@@ -67,15 +66,6 @@ class CommonConfig {
 
     void config(String path) {
         config(project.file(path))
-    }
-
-    Severity easy() { Severity.EASY }
-
-    Severity hard() { Severity.HARD }
-
-    void config(Severity severity) {
-        checkConfigDefined()
-        this.configSeverity = severity
     }
 
     File reportXML
@@ -104,9 +94,6 @@ class CommonConfig {
         if (configFile) {
             return configFile.text
         }
-        if (configSeverity) {
-            return Utils.getResource(project, "$code/$code-${configSeverity.suffix}.xml")
-        }
 
         File file = project.file("config/${code}.xml")
         if (file.exists()) {
@@ -118,7 +105,7 @@ class CommonConfig {
             return rootFile.text
         }
 
-        return Utils.getResource(project, "$code/$code-${Severity.EASY.suffix}.xml")
+        return Utils.getResource(project, "$code/conf-default.xml")
     }
 
     File resolveConfigFile(String code) {

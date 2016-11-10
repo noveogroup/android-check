@@ -37,24 +37,9 @@ Configuration
 
 ### Recommended
 
-The default one (empty).
+The default one.
 
-### Hardcore
-
-```
-check {
-  abortOnError true
-  checkstyle { 
-    config hard() 
-  }
-  findbugs {
-    config hard() 
-  }
-  pmd { config hard() }
-}
-```
-
-### Description
+### Customized
 
 ```
 // Configuration is completely optional, defaults will be used if not present

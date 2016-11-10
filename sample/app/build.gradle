@@ -38,7 +38,6 @@ check {
 
     findbugs {
         abortOnError false
-        config hard()
         reportXML new File(project.buildDir, 'reports/findbugs/findbugs.xml')
     }
 
