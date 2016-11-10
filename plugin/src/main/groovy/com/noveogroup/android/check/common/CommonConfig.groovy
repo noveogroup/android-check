@@ -78,13 +78,8 @@ class CommonConfig {
         this.configSeverity = severity
     }
 
-    File reportDirectory
     File reportXML
     File reportHTML
-
-    void report(File reportDirectory) {
-        this.reportDirectory = reportDirectory
-    }
 
     void reportXML(File reportXML) {
         this.reportXML = reportXML
@@ -146,24 +141,20 @@ class CommonConfig {
         return file
     }
 
-    private File resolveReportFile(String extension, File reportFile, File reportDirectory, String code) {
+    private File resolveReportFile(String extension, File reportFile, String code) {
         if (reportFile) {
             return reportFile
-        }
-
-        if (reportDirectory) {
-            return new File(reportDirectory, "${code}.${extension}")
         }
 
         return new File(project.buildDir, "outputs/${code}/${code}.${extension}")
     }
 
     File resolveXmlReportFile(String code) {
-        return resolveReportFile('xml', reportXML, reportDirectory, code)
+        return resolveReportFile('xml', reportXML, code)
     }
 
     File resolveHtmlReportFile(String code) {
-        return resolveReportFile('html', reportHTML, reportDirectory, code)
+        return resolveReportFile('html', reportHTML, code)
     }
 
     List<File> getAndroidSources() {

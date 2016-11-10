@@ -44,6 +44,6 @@ check {
 
     pmd {
         abortOnError false
-        report new File(project.buildDir, 'reports/pmd')
+        reportHTML new File(project.buildDir, 'reports/pmd/pmd.html')
     }
 }

@@ -74,9 +74,6 @@ check {
     // Configuration file for CheckStyle, default: <project_path>/config/checkstyle.xml, if non-existent then <project_path>/<module_path>/config/checkstyle.xml, if non-existent then plugin/src/main/resources/checkstyle/conf-default.xml 
     config 'path/to/checkstyle.xml'
 
-    // TODO: REMOVE
-    report new File(project.buildDir, 'reports/checkstyle')
-
     // Output file for XML reports, default: new File(project.buildDir, 'outputs/checkstyle/checkstyle.xml')
     reportXML new File(project.buildDir, 'path/where/you/want/checkstyle.xml')
     
