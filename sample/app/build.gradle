@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.noveogroup.android.check'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         versionCode 1
         versionName '1.0'
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 25
     }
 
     compileOptions {
@@ -17,12 +17,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    lintOptions { abortOnError false }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-    compile fileTree(dir: rootProject.file('libs'), include: ['*.jar'])
-    compile fileTree(dir: project.file('libs'), include: ['*.jar'])
     compile project(':libs:sample-android-library')
     compile project(':libs:sample-java-library')
     compile 'org.slf4j:slf4j-api:1.7.12'
