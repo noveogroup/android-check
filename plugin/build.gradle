@@ -1,0 +1,72 @@
+apply plugin: 'groovy'
+
+repositories { jcenter() }
+
+dependencies {
+    compile gradleApi()
+
+    // Checkstyle
+    compile('com.puppycrawl.tools:checkstyle:6.10.1') {
+        // Android Lint also depends on guava, so don't bring it in twice
+        exclude module: 'guava'
+    }
+
+    // FindBugs
+    compile 'com.google.code.findbugs:findbugs:3.0.1'
+
+    // PMD
+    compile 'net.sourceforge.pmd:pmd-java:5.3.4'
+}
+
+group = 'com.noveogroup.android'
+version = '1.2.3'
+description = 'Static code analysis plugin for Android project.'
+
+project.ext {
+    plugin = 'com.noveogroup.android.check'
+    name = 'Android Check Plugin'
+    website = 'https://github.com/noveogroup/android-check'
+    scm = 'https://github.com/noveogroup/android-check'
+    pom = {
+        licenses {
+            license {
+                name 'The MIT License (MIT)'
+                url 'http://opensource.org/licenses/MIT'
+                distribution 'repo'
+            }
+        }
+        scm {
+            url project.ext.scm
+            connection 'scm:git@github.com:noveogroup/android-check.git'
+            developerConnection 'scm:git@github.com:noveogroup/android-check.git'
+        }
+        issueManagement {
+            system 'GitHub'
+            url 'https://github.com/noveogroup/android-check/issues'
+        }
+        developers {
+            developer {
+                name 'Pavel Stepanov'
+                url 'https://github.com/stefan-nsk'
+                roles {
+                    role 'architect'
+                    role 'developer'
+                }
+            }
+        }
+    }
+    bintray = {
+        user = project.hasProperty('bintray.user') ? project['bintray.user'] : 'anonymous'
+        key = project.hasProperty('bintray.key') ? project['bintray.key'] : 'api-key'
+        repo = 'android-check'
+        tags = ['android', 'plugin', 'check']
+        licenses = ['MIT']
+        issueTracker = 'https://github.com/noveogroup/android-check/issues'
+        vcs = 'https://github.com/noveogroup/android-check'
+        dryRun = false  // whether to run this as dry-run, without deploying
+        publish = false // if version should be auto published after an upload
+    }
+}
+
+apply from: project.file('gradle/gradle-publish.gradle')
+apply from: project.file('gradle/publish.gradle')
