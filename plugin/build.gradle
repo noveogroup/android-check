@@ -6,7 +6,7 @@ dependencies {
     compile gradleApi()
 
     // Checkstyle
-    compile('com.puppycrawl.tools:checkstyle:6.10.1') {
+    compile('com.puppycrawl.tools:checkstyle:7.3') {
         // Android Lint also depends on guava, so don't bring it in twice
         exclude module: 'guava'
     }
@@ -15,7 +15,7 @@ dependencies {
     compile 'com.google.code.findbugs:findbugs:3.0.1'
 
     // PMD
-    compile 'net.sourceforge.pmd:pmd-java:5.3.4'
+    compile 'net.sourceforge.pmd:pmd-java:5.5.2'
 }
 
 group = 'com.noveogroup.android'
