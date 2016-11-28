@@ -9,3 +9,9 @@ cache:
     - $HOME/.gradle/wrapper/
 script:
   - ./gradlew clean :plugin:assemble clean :plugin:check
+after_success:
+  - |
+      if [ "$(git rev-parse --abbrev-ref HEAD)" = "master" ]; then
+        echo "CI on master succeded. Executing release task..."
+        ./gradlew bintrayUpload
+      fi

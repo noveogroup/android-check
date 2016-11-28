@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.noveogroup.android.check'
+apply plugin: 'org.stoyicker.android-check'
 
 android {
     compileSdkVersion 25

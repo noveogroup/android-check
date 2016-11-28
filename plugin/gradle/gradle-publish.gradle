@@ -3,31 +3,28 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.0'
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.7'
     }
 }
 
 // hack: plugin 'com.gradle.plugin-publish' is not visible by name
 apply plugin: com.gradle.publish.PublishPlugin
-// hack: without it bintray property is not visible
-logger.debug("$project.ext.bintray")
 
 pluginBundle {
     website = project.ext.website
     vcsUrl = project.ext.scm
-    description = project.description
-
+    description = project.ext.description
     plugins {
         checkPlugin {
             id = project.ext.plugin
             displayName = project.ext.name
-            tags = project.ext.bintray.tags
-            version = project.version
+            tags = project.ext.tags
+            version = project.ext.version
         }
     }
     mavenCoordinates {
-        groupId = project.group
-        artifactId = project.name
-        version = project.version
+        groupId = project.ext.groupId
+        artifactId = project.ext.artifactId
+        version = project.ext.version
     }
 }
