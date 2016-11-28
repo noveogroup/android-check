@@ -30,6 +30,8 @@ import com.noveogroup.android.check.CheckExtension
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 
+import java.awt.Desktop
+
 abstract class CommonCheck<Config extends CommonConfig> {
 
     final String taskCode
@@ -88,6 +90,7 @@ abstract class CommonCheck<Config extends CommonConfig> {
                 if (errorCount) {
                     String errorMessage = getErrorMessage(errorCount, htmlReportFile)
                     if (abortOnError) {
+                        Desktop.browse(new URI(htmlReportFile))
                         throw new GradleException(errorMessage)
                     } else {
                         target.logger.warn errorMessage
