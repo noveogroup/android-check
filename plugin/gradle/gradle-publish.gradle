@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.7'
+    }
+}
+
+// hack: plugin 'com.gradle.plugin-publish' is not visible by name
+apply plugin: com.gradle.publish.PublishPlugin
+
+pluginBundle {
+    website = project.ext.website
+    vcsUrl = project.ext.scm
+    description = project.ext.description
+    plugins {
+        checkPlugin {
+            id = project.ext.plugin
+            displayName = project.ext.name
+            tags = project.ext.tags
+            version = project.ext.version
+        }
+    }
+    mavenCoordinates {
+        groupId = project.ext.groupId
+        artifactId = project.ext.artifactId
+        version = project.ext.version
+    }
+}

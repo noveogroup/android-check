@@ -1,0 +1,2 @@
+include ':libs:sample-android-library', ':libs:sample-java-library', ':app'
+rootProject.name = 'sample'

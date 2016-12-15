@@ -1,0 +1,74 @@
+apply plugin: 'maven-publish'
+
+task('groovydocJar', type: Jar, dependsOn: groovydoc) {
+    group 'documentation'
+    description 'Assembles a jar archive containing Groovydoc API documentation.'
+    classifier = 'groovydoc'
+    from javadoc.getDestinationDir()
+}
+
+task('sourcesJar', type: Jar) {
+    group 'documentation'
+    description 'Assembles a jar archive containing the main source code.'
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact groovydocJar
+            artifact sourcesJar
+            groupId project.ext.groupId
+            artifactId project.ext.artifactId
+            version project.ext.version
+
+            pom.withXml {
+                asNode().appendNode('name', project.ext.name)
+                asNode().appendNode('description', project.ext.description)
+                asNode().appendNode('url', project.ext.website)
+                asNode().children().last() + project.ext.pom
+            }
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
+// hack: plugin 'com.jfrog.bintray' is not visible by name
+apply plugin: com.jfrog.bintray.gradle.BintrayPlugin
+// hack: without it bintray property is not visible
+logger.debug("$project.ext.bintray")
+
+bintray {
+    user = project.ext.bintray.user
+    key = project.ext.bintray.key
+    publications = ['maven']
+    dryRun = project.ext.bintray.dryRun
+    publish = project.ext.bintray.publish
+    pkg {
+        repo = project.ext.bintray.repo
+        userOrg = project.ext.bintray.org
+        name = project.ext.bintray.groupId
+        desc = project.description
+        websiteUrl = project.ext.website
+        issueTrackerUrl = project.ext.issueTracker
+        vcsUrl = project.ext.vcs
+        licenses = project.ext.bintray.licenses
+        labels = project.ext.tags
+        publicDownloadNumbers = true
+        groupId = project.ext.bintray.groupId
+        artifactId = project.ext.bintray.artifactId
+        version {
+            name = project.ext.bintray.version
+        }
+    }
+}

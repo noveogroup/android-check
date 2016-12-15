@@ -1,0 +1,6 @@
+*.properties
+!gradle-wrapper.properties
+.gradle
+build
+.idea
+*.iml

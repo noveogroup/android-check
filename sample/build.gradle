@@ -1,0 +1,11 @@
+buildscript {
+    repositories { jcenter(); mavenLocal() }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+//        classpath 'io.github.stoyicker:check:2.0.0'
+    }
+}
+
+allprojects {
+    repositories { jcenter(); mavenLocal() }
+}

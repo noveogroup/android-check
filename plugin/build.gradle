@@ -1,0 +1,72 @@
+apply plugin: 'groovy'
+
+repositories { jcenter() }
+
+dependencies {
+    compile gradleApi()
+    // Checkstyle
+    compile('com.puppycrawl.tools:checkstyle:7.3') {
+        // Android Lint also depends on guava, so don't bring it in twice
+        exclude module: 'guava'
+    }
+    // FindBugs
+    compile 'com.google.code.findbugs:findbugs:3.0.1'
+    // PMD
+    compile 'net.sourceforge.pmd:pmd-java:5.5.2'
+}
+
+final def masterCommitCount = 'git rev-list --count origin/master'.execute([], project.rootDir).text.trim()
+
+project.ext {
+    plugin = 'org.stoyicker.android-check'
+    name = 'Android Check Plugin 2'
+    description = 'Static code analysis plugin for Android projects.'
+    groupId = 'org.stoyicker.android-check'
+    artifactId = 'plugin'
+    version = "2.$masterCommitCount"
+    website = 'https://github.com/stoyicker/android-check-2'
+    scm = 'https://github.com/stoyicker/android-check-2'
+    tags = ['android', 'plugin', 'check']
+    pom = {
+        licenses {
+            license {
+                name 'The MIT License (MIT)'
+                url 'https://opensource.org/licenses/MIT'
+                distribution 'repo'
+            }
+        }
+        scm {
+            url project.ext.scm
+            connection 'scm:git@github.com:stoyicker/android-check-2.git'
+            developerConnection 'scm:git@github.com:stoyicker/android-check.git'
+        }
+        issueManagement {
+            system 'GitHub'
+            url "${project.ext.scm}/issues"
+        }
+        developers {
+            developer {
+                name 'Jorge Antonio Diaz-Benito Soriano'
+                url 'https://www.linkedin.com/in/jorgediazbenitosoriano'
+                roles {
+                    role 'developer'
+                }
+            }
+        }
+    }
+    bintray = {
+        user = project.hasProperty('bintray.user') ? project['bintray.user'] : 'anonymous'
+        key = project.hasProperty('bintray.key') ? project['bintray.key'] : 'api-key'
+        repo = 'android-check-2'
+        org = 'stoyicker-org'
+        licenses = ['MIT']
+        issueTracker = 'https://github.com/stoyicker/android-check-2/issues'
+        vcs = project.ext.scm
+        sign = true
+        dryRun = false
+        publish = true
+    }
+}
+
+apply from: project.file('gradle/gradle-publish.gradle')
+apply from: project.file('gradle/publish.gradle')

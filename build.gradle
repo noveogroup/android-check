@@ -1,0 +1,10 @@
+task wrapper(type: Wrapper) {
+    group 'Build Setup'
+    description 'Initializes the Gradle Wrapper.'
+    gradleVersion = '3.2.1'
+}
+
+task clean(type: Delete) {
+	delete rootProject.allprojects.collect {project -> project.buildDir}
+    followSymlinks false
+}

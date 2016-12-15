@@ -1,21 +1,26 @@
-Android Check
-=============
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--check-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1530)
+Android Check 2
+===============
 
 Static code analysis plugin for Android project.
+This is a fork of [the original android-check plugin][1], which implements a really useful concept, but unfortunately seems abandoned.
+
+Build status
+------------
+
+### master [![master](https://travis-ci.org/stoyicker/android-check-2.svg?branch=master)](https://travis-ci.org/stoyicker/android-check-2)
+### dev [![dev](https://travis-ci.org/stoyicker/android-check-2.svg?branch=dev)](https://travis-ci.org/stoyicker/android-check-2)
 
 Usage
 -----
 
 Modifications in `<project_dir>/build.gradle`:
 
-```groovy
+```
 buildscript {
     repositories { jcenter() }
     dependencies {
         ...
-        classpath 'com.noveogroup.android:check:1.2.3'
+        classpath 'io.github.stoyicker:check:2.0.0'
         ...
     }
 }
@@ -23,8 +28,8 @@ buildscript {
 
 Modifications in `<project_dir>/<module_name>/build.gradle`:
 
-```groovy
-apply plugin: 'com.noveogroup.android.check'
+```
+apply plugin: 'org.stoyicker.android-check'
 ```
 
 Configuration
@@ -32,100 +37,53 @@ Configuration
 
 ### Recommended
 
-Recommended configuration is a default one (empty).
+The default one.
 
-```groovy
-// no configuration
+### Customized
+
 ```
-
-### Hardcore
-
-```groovy
+// Configuration is completely optional, defaults will be used if not present
 check {
-  abortOnError true
-  checkstyle { config hard() }
-  findbugs { config hard() }
-  pmd { config hard() }
-}
-```
-
-### Skip checking
-
-```groovy
-check { skip true }
-```
-
-Skip Checkstyle only
-
-```groovy
-check { checkstyle { skip true } }
-```
-
-Skip FindBugs only
-
-```groovy
-check { findbugs { skip true } }
-```
-
-Skip PMD only
-
-```groovy
-check { pmd { skip true } }
-```
-
-### Description
-
-```groovy
-// configuration is optional
-check {
-  // skip source code checking or not, false by deafult
+  // Do absolutely nothing, default: false
   skip true/false
-  // fails build if code style violation is found, false by default
+  // Fails build if a violation is found, default: false
   abortOnError true/false
-  // configuration of Checkstyle checker
+  // Checkstyle configuration
   checkstyle {
-    // skip Checkstyle, false by deafult
+    // Completely skip CheckStyle, default: false
     skip true/false
 
-    // fails build if Checkstyle rule violation is found, false by default
+    // Fails build if CheckStyle rule violation is found, default: false
     abortOnError true/false
 
-    // configuration file
-    config project.file('path/to/checkstyle.xml')
-    // configuration resource
-    // see http://gradle.org/docs/2.2/release-notes#sharing-configuration-files-across-builds
-    config resources.text.fromFile(someTask)
-    // configuration path
+    // Configuration file for CheckStyle, default: <project_path>/config/checkstyle.xml, if non-existent then <project_path>/<module_path>/config/checkstyle.xml, if non-existent then plugin/src/main/resources/checkstyle/conf-default.xml
     config 'path/to/checkstyle.xml'
-    // predefined configurations: easy and hard
-    config easy()
-    config hard()
-    // by default plugin finds configuration file in <rootProject>/config/checkstyle.xml,
-    // after that in <project>/config/checkstyle.xml and if there are no configuration
-    // file, easy() configuration will be used.
 
-    // directory for report files
-    report new File(project.buildDir, 'reports/pmd')
-    // XML report file
-    reportXML new File(project.buildDir, 'reports/findbugs/findbugs.xml')
-    // HTML report file
-    reportHTML new File(project.buildDir, 'reports/findbugs/findbugs.html')
+    // Output file for XML reports, default: new File(project.buildDir, 'outputs/checkstyle/checkstyle.xml')
+    reportXML new File(project.buildDir, 'path/where/you/want/checkstyle.xml')
+
+    // Output file for HTML reports, default: not generated
+    reportHTML new File(project.buildDir, 'path/where/you/want/checkstyle.html')
   }
-  // configuration of FindBugs checker
+  // FindBugs configuration
   findbugs {
-    // the same configuration as for Checkstyle
+    // Same options as Checkstyle, except for a couple of defaults:
 
-    // by default plugin finds configuration file in <rootProject>/config/findbugs.xml,
-    // after that in <project>/config/findbugs.xml and if there are no configuration
-    // file, easy() configuration will be used.
+    // Configuration file for CheckStyle, default: <project_path>/config/findbugs.xml, if non-existent then <project_path>/<module_path>/config/findbugs.xml, if non-existent then plugin/src/main/resources/findbugs/conf-default.xml
+    config 'path/to/findbugs.xml'
+
+    // Output file for XML reports, default: new File(project.buildDir, 'outputs/findbugs/findbugs.xml')
+    reportXML new File(project.buildDir, 'path/where/you/want/findbugs.xml')
   }
-  // configuration of PMD checker
+  // PMD configuration
   pmd {
-    // the same configuration as for Checkstyle
+    // Same options as Checkstyle and FindBugs, except for a couple of defaults:
 
-    // by default plugin finds configuration file in <rootProject>/config/pmd.xml,
-    // after that in <project>/config/pmd.xml and if there are no configuration
-    // file, easy() configuration will be used.
+    // Configuration file for CheckStyle, default: <project_path>/config/pmd.xml, if non-existent then <project_path>/<module_path>/config/pmd.xml, if non-existent then plugin/src/main/resources/pmd/conf-default.xml
+    config 'path/to/pmd.xml'
+
+    // Output file for XML reports, default: new File(project.buildDir, 'outputs/pmd/pmd.xml')
+    reportXML new File(project.buildDir, 'path/where/you/want/pmd.xml')
   }
 }
 ```
@@ -133,34 +91,19 @@ check {
 Developed By
 ============
 
-* [Noveo Group][1]
-* [Pavel Stepanov](https://github.com/stefan-nsk) - <pstepanov@noveogroup.com>
+The original version of this plugin was developed by:
+
+  - [Noveo Group][2]
+  - [Pavel Stepanov](https://github.com/stefan-nsk) - <pstepanov@noveogroup.com>
+
+This fork is owned and maintained by [Jorge Antonio Diaz-Benito Soriano](https://www.linkedin.com/in/jorgediazbenitosoriano).
 
 License
 =======
 
-    Copyright (c) 2014 Noveo Group
+See [LICENSE.txt](LICENSE.txt).
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
+Original work licensed under [MIT license](https://github.com/noveogroup/android-check/blob/master/LICENSE.txt).
 
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    Except as contained in this notice, the name(s) of the above copyright holders
-    shall not be used in advertising or otherwise to promote the sale, use or
-    other dealings in this Software without prior written authorization.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
-
-[1]: http://noveogroup.com/
+[1]: https://github.com/noveogroup/android-check
+[2]: http://noveogroup.com/
