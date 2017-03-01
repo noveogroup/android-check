@@ -33,7 +33,7 @@ publishing {
 
 buildscript {
     repositories { jcenter() }
-    dependencies { classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6' }
+    dependencies { classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3' }
 }
 // hack: plugin 'com.jfrog.bintray' is not visible by name
 apply plugin: com.jfrog.bintray.gradle.BintrayPlugin
