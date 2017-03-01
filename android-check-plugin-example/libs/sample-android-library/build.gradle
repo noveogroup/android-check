@@ -1,19 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '25.0.2'
 
     defaultConfig {
         versionCode 1
         versionName '1.0'
         minSdkVersion 14
-        targetSdkVersion 23
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        targetSdkVersion 25
     }
 
     lintOptions {
@@ -39,5 +34,5 @@ android {
 dependencies {
     compile fileTree(dir: rootProject.file('libs'), include: ['*.jar'])
     compile fileTree(dir: project.file('libs'), include: ['*.jar'])
-    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:25.2.0'
 }

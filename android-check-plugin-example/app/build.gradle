@@ -2,19 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.noveogroup.android.check'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '25.0.2'
 
     defaultConfig {
         versionCode 1
         versionName '1.0'
         minSdkVersion 14
-        targetSdkVersion 23
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        targetSdkVersion 25
     }
 
     lintOptions { abortOnError false }
