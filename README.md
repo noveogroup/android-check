@@ -134,7 +134,8 @@ Developed By
 ============
 
 * [Noveo Group][1]
-* [Pavel Stepanov](https://github.com/stefan-nsk) - <pstepanov@noveogroup.com>
+* [Pavel Stepanov](https://github.com/stefan-nsk)
+* [Sergey Malichenko](https://github.com/smalichenko) - <Sergey.Malichenko@noveogroup.com>
 
 License
 =======

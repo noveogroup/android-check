@@ -59,6 +59,13 @@ project.ext {
                     role 'developer'
                 }
             }
+            developer {
+                name 'Sergey Malichenko'
+                url 'https://github.com/smalichenko'
+                roles {
+                    role 'developer'
+                }
+            }
         }
     }
     bintray = {
