@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.noveogroup.android.check'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         versionCode 1
         versionName '1.0'
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 25
     }
 
     compileOptions {
@@ -25,8 +25,12 @@ dependencies {
     compile fileTree(dir: project.file('libs'), include: ['*.jar'])
     compile project(':libs:sample-android-library')
     compile project(':libs:sample-java-library')
-    compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'com.github.tony19:logback-android-classic:1.1.1-4'
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'com.github.tony19:logback-android-core:1.1.1-6'
+    compile('com.github.tony19:logback-android-classic:1.1.1-6') {
+        // workaround issue #73
+        exclude group: 'com.google.android', module: 'android'
+    }
 }
 
 check {
