@@ -15,7 +15,7 @@ buildscript {
     repositories { jcenter() }
     dependencies {
         ...
-        classpath 'com.noveogroup.android:check:1.2.3'
+        classpath 'com.noveogroup.android:check:1.2.4'
         ...
     }
 }
@@ -139,7 +139,7 @@ Developed By
 License
 =======
 
-    Copyright (c) 2014 Noveo Group
+    Copyright (c) 2017 Noveo Group
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
