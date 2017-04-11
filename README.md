@@ -78,13 +78,13 @@ check { pmd { skip true } }
 ```groovy
 // configuration is optional
 check {
-  // skip source code checking or not, false by deafult
+  // skip source code checking or not, false by default
   skip true/false
   // fails build if code style violation is found, false by default
   abortOnError true/false
   // configuration of Checkstyle checker
   checkstyle {
-    // skip Checkstyle, false by deafult
+    // skip Checkstyle, false by default
     skip true/false
 
     // fails build if Checkstyle rule violation is found, false by default
@@ -107,9 +107,9 @@ check {
     // directory for report files
     report new File(project.buildDir, 'reports/pmd')
     // XML report file
-    reportXML new File(project.buildDir, 'reports/findbugs/findbugs.xml')
+    reportXML new File(project.buildDir, 'reports/checkstyle/checkstyle.xml')
     // HTML report file
-    reportHTML new File(project.buildDir, 'reports/findbugs/findbugs.html')
+    reportHTML new File(project.buildDir, 'reports/checkstyle/checkstyle.html')
   }
   // configuration of FindBugs checker
   findbugs {
