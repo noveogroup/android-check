@@ -64,33 +64,35 @@ abstract class CommonCheck<Config extends CommonConfig> {
         target.task(
                 [group      : 'verification',
                  description: taskDescription],
-                taskName) << {
-            CheckExtension extension = target.extensions.findByType(CheckExtension)
-            Config config = getConfig(extension)
+                taskName) {
+            doLast {
+                CheckExtension extension = target.extensions.findByType(CheckExtension)
+                Config config = getConfig(extension)
 
-            boolean skip = config.resolveSkip(extension.skip)
-            boolean abortOnError = config.resolveAbortOnError(extension.abortOnError)
-            File configFile = config.resolveConfigFile(taskCode)
-            File styleFile = config.resolveStyleFile(taskCode)
-            File xmlReportFile = config.resolveXmlReportFile(taskCode)
-            File htmlReportFile = config.resolveHtmlReportFile(taskCode)
-            List<File> sources = config.getAndroidSources()
+                boolean skip = config.resolveSkip(extension.skip)
+                boolean abortOnError = config.resolveAbortOnError(extension.abortOnError)
+                File configFile = config.resolveConfigFile(taskCode)
+                File styleFile = config.resolveStyleFile(taskCode)
+                File xmlReportFile = config.resolveXmlReportFile(taskCode)
+                File htmlReportFile = config.resolveHtmlReportFile(taskCode)
+                List<File> sources = config.getAndroidSources()
 
-            if (skip) {
-                target.logger.warn "skip $taskName"
-            } else {
-                xmlReportFile.parentFile.mkdirs()
-                performCheck(target, sources, configFile, xmlReportFile)
-                htmlReportFile.parentFile.mkdirs()
-                reformatReport(target, styleFile, xmlReportFile, htmlReportFile)
+                if (skip) {
+                    target.logger.warn "skip $taskName"
+                } else {
+                    xmlReportFile.parentFile.mkdirs()
+                    performCheck(target, sources, configFile, xmlReportFile)
+                    htmlReportFile.parentFile.mkdirs()
+                    reformatReport(target, styleFile, xmlReportFile, htmlReportFile)
 
-                int errorCount = getErrorCount(xmlReportFile)
-                if (errorCount) {
-                    String errorMessage = getErrorMessage(errorCount, htmlReportFile)
-                    if (abortOnError) {
-                        throw new GradleException(errorMessage)
-                    } else {
-                        target.logger.warn errorMessage
+                    int errorCount = getErrorCount(xmlReportFile)
+                    if (errorCount) {
+                        String errorMessage = getErrorMessage(errorCount, htmlReportFile)
+                        if (abortOnError) {
+                            throw new GradleException(errorMessage)
+                        } else {
+                            target.logger.warn errorMessage
+                        }
                     }
                 }
             }
