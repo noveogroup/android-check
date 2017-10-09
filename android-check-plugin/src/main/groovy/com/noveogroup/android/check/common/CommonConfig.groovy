@@ -45,6 +45,10 @@ class CommonConfig {
 
     void abortOnError(boolean abortOnError) { this.abortOnError = abortOnError }
 
+    int threshold = -1
+
+    void threshold(int threshold) { this.threshold = threshold }
+
     private TextResource configResource = null
     private File configFile = null
     private Severity configSeverity = null

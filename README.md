@@ -90,6 +90,9 @@ check {
     // fails build if Checkstyle rule violation is found, false by default
     abortOnError true/false
 
+    // fails build if threshold is breached. -1 by default, meaning threshold not checked
+    threshold -1
+
     // configuration file
     config project.file('path/to/checkstyle.xml')
     // configuration resource
