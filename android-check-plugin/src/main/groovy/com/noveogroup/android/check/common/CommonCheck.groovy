@@ -71,6 +71,7 @@ abstract class CommonCheck<Config extends CommonConfig> {
 
                 boolean skip = config.resolveSkip(extension.skip)
                 boolean abortOnError = config.resolveAbortOnError(extension.abortOnError)
+                int threshold = config.threshold
                 File configFile = config.resolveConfigFile(taskCode)
                 File styleFile = config.resolveStyleFile(taskCode)
                 File xmlReportFile = config.resolveXmlReportFile(taskCode)
@@ -88,7 +89,8 @@ abstract class CommonCheck<Config extends CommonConfig> {
                     int errorCount = getErrorCount(xmlReportFile)
                     if (errorCount) {
                         String errorMessage = getErrorMessage(errorCount, htmlReportFile)
-                        if (abortOnError) {
+                        boolean thresholdBreached = -1 < threshold && threshold < errorCount
+                        if (abortOnError || thresholdBreached) {
                             throw new GradleException(errorMessage)
                         } else {
                             target.logger.warn errorMessage
