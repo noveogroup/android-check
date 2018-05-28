@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.noveogroup.android.check'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         versionCode 1
         versionName '1.0'
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 15
+        targetSdkVersion 27
     }
 
     compileOptions {
@@ -17,17 +17,19 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    lintOptions { abortOnError false }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-    compile fileTree(dir: rootProject.file('libs'), include: ['*.jar'])
-    compile fileTree(dir: project.file('libs'), include: ['*.jar'])
-    compile project(':libs:sample-android-library')
-    compile project(':libs:sample-java-library')
-    compile 'org.slf4j:slf4j-api:1.7.21'
-    compile 'com.github.tony19:logback-android-core:1.1.1-6'
-    compile('com.github.tony19:logback-android-classic:1.1.1-6') {
+    implementation fileTree(dir: rootProject.file('libs'), include: ['*.jar'])
+    implementation fileTree(dir: project.file('libs'), include: ['*.jar'])
+    implementation project(':libs:sample-android-library')
+    implementation project(':libs:sample-java-library')
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+
+    implementation('com.github.tony19:logback-android:1.1.1-12') {
         // workaround issue #73
         exclude group: 'com.google.android', module: 'android'
     }

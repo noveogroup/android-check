@@ -1,12 +1,30 @@
 buildscript {
-    repositories { jcenter(); mavenLocal() }
+    repositories {
+        jcenter()
+
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
-        classpath 'com.noveogroup.android:check:1.2.4'
+        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.noveogroup.android:check:1.2.6'
     }
 }
 
 allprojects {
-    repositories { jcenter(); mavenLocal() }
+    repositories {
+        jcenter()
+
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    group 'Build Setup'
+    description 'Initializes Gradle Wrapper.'
+    gradleVersion = '4.7'
 }
 

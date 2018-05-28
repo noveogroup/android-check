@@ -33,6 +33,8 @@ import groovy.util.slurpersupport.GPathResult
 import net.sourceforge.pmd.ant.Formatter
 import net.sourceforge.pmd.ant.PMDTask
 import org.gradle.api.Project
+import java.nio.file.Path
+import java.nio.file.Paths
 
 class PmdCheck extends CommonCheck {
 
@@ -49,6 +51,9 @@ class PmdCheck extends CommonCheck {
         pmdTask.project = project.ant.antProject
         pmdTask.ruleSetFiles = configFile.toString()
         pmdTask.addFormatter(new Formatter(type: 'xml', toFile: xmlReportFile))
+
+        Path cacheDir = Paths.get(project.getBuildDir().toString(), "tmp", "pmd.cache")
+        pmdTask.cacheLocation = cacheDir.toString()
 
         pmdTask.failOnError = false
         pmdTask.failOnRuleViolation = false

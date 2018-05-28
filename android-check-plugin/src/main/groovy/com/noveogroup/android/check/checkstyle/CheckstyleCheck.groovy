@@ -48,7 +48,7 @@ class CheckstyleCheck extends CommonCheck {
         CheckstyleAntTask checkStyleTask = new CheckstyleAntTask()
 
         checkStyleTask.project = project.ant.antProject
-        checkStyleTask.configURL = configFile.toURI().toURL()
+        checkStyleTask.setConfig(configFile.getPath())
         checkStyleTask.addFormatter(new Formatter(type: new FormatterType(value: 'xml'), tofile: xmlReportFile))
 
         checkStyleTask.failOnViolation = false
