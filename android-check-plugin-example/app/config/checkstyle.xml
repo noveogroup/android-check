@@ -80,7 +80,6 @@
         <module name="RedundantImport" />
         <module name="UnusedImports" />
 
-
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <module name="LineLength">
@@ -92,7 +91,6 @@
         </module>
         <module name="MethodLength" />
         <module name="ParameterNumber" />
-
 
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->
@@ -112,7 +110,6 @@
         <module name="ModifierOrder" />
         <module name="RedundantModifier" />
 
-
         <!-- Checks for blocks. You know, those {}'s         -->
         <!-- See http://checkstyle.sf.net/config_blocks.html -->
         <module name="AvoidNestedBlocks" />
@@ -122,7 +119,6 @@
         <module name="LeftCurly" />
         <module name="NeedBraces" />
         <module name="RightCurly" />
-
 
         <!-- Checks for common coding problems               -->
         <!-- See http://checkstyle.sf.net/config_coding.html -->
@@ -152,7 +148,6 @@
         <module name="InterfaceIsType" />
         <module name="VisibilityModifier" />
 
-
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="ArrayTypeStyle" />
@@ -166,18 +161,18 @@
         </module>
         <module name="UpperEll" />
 
-    </module>
+        <!-- Enable suppression comments -->
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="CHECKSTYLE IGNORE\s+(\S+)" />
+            <property name="onCommentFormat" value="CHECKSTYLE END IGNORE\s+(\S+)" />
+            <property name="checkFormat" value="$1" />
+        </module>
+        <module name="SuppressWithNearbyCommentFilter">
+            <property name="commentFormat" value="SUPPRESS CHECKSTYLE (\w+)" />
+            <property name="checkFormat" value="$1" />
+            <property name="influenceFormat" value="1" />
+        </module>
 
-    <!-- Enable suppression comments -->
-    <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="CHECKSTYLE IGNORE\s+(\S+)" />
-        <property name="onCommentFormat" value="CHECKSTYLE END IGNORE\s+(\S+)" />
-        <property name="checkFormat" value="$1" />
-    </module>
-    <module name="SuppressWithNearbyCommentFilter">
-        <property name="commentFormat" value="SUPPRESS CHECKSTYLE (\w+)" />
-        <property name="checkFormat" value="$1" />
-        <property name="influenceFormat" value="1" />
     </module>
 
 </module>
